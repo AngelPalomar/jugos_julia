@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
   const Signup({super.key});
 
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     Widget titleSection = Row(
@@ -33,6 +38,12 @@ class Signup extends StatelessWidget {
           ],
         )
       ],
+    );
+
+    Widget form = Form(
+      child: Column(
+        children: <Widget>[],
+      ),
     );
 
     return SafeArea(
