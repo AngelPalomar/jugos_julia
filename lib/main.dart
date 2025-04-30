@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jugos_julia/screens/public/login.dart';
-//import 'package:jugos_julia/screens/public/signup.dart';
+import 'package:jugos_julia/screens/public/signup.dart';
 
 void main() {
   runApp(const MainApp());
 }
+
+// GoRouter configuration
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const Login(),
+    ),
+    GoRoute(
+      path: '/signup',
+      builder: (context, state) => const Signup(),
+    ),
+  ],
+);
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
@@ -23,11 +39,6 @@ class MainApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.white,
       ),
-      /* routes: {
-        '/': (context) => const Login(),
-        '/signup': (context) => const Signup(),
-      }, */
-      home: const Login(),
     );
   }
 }

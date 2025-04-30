@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -14,7 +15,7 @@ class _SignupState extends State<Signup> {
       children: [
         IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            context.go('/');
           },
           color: Theme.of(context).colorScheme.primary,
           icon: const Icon(Icons.arrow_back),
@@ -42,7 +43,40 @@ class _SignupState extends State<Signup> {
 
     Widget form = Form(
       child: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              filled: true,
+              fillColor: Colors.grey[100],
+              isDense: false,
+              hintText: "Teléfono.",
+              hintStyle: const TextStyle(fontSize: 12),
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              filled: true,
+              fillColor: Colors.grey[100],
+              isDense: false,
+              hintText: "Contraseña.",
+              hintStyle: const TextStyle(fontSize: 12),
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              filled: true,
+              fillColor: Colors.grey[100],
+              isDense: false,
+              hintText: "Confirmar contraseña.",
+              hintStyle: const TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
       ),
     );
 
@@ -52,6 +86,10 @@ class _SignupState extends State<Signup> {
           padding: const EdgeInsets.all(24),
           children: [
             titleSection,
+            Container(
+              margin: const EdgeInsets.only(top: 24),
+              child: form,
+            )
           ],
         ),
       ),

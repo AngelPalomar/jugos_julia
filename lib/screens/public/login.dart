@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jugos_julia/screens/public/signup.dart';
+import 'package:go_router/go_router.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -56,8 +56,8 @@ class _LoginState extends State<Login> {
                       border: InputBorder.none,
                       filled: true,
                       fillColor: Colors.grey[100],
-                      isDense: true,
-                      hintText: "Correo electrónico o teléfono.",
+                      isDense: false,
+                      hintText: "Teléfono.",
                       hintStyle: const TextStyle(fontSize: 12),
                     ),
                   ),
@@ -67,7 +67,7 @@ class _LoginState extends State<Login> {
                       border: InputBorder.none,
                       filled: true,
                       fillColor: Colors.grey[100],
-                      isDense: true,
+                      isDense: false,
                       hintText: "Contraseña",
                       hintStyle: const TextStyle(fontSize: 12),
                     ),
@@ -80,12 +80,7 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 6),
                   FilledButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Signup(),
-                        ),
-                      );
+                      context.go('/signup');
                     },
                     style: FilledButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.secondary,
