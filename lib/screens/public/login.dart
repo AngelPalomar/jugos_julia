@@ -52,6 +52,7 @@ class _LoginState extends State<Login> {
               Column(
                 children: [
                   TextFormField(
+                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       filled: true,
@@ -63,6 +64,7 @@ class _LoginState extends State<Login> {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       filled: true,
