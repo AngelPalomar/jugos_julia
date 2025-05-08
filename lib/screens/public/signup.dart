@@ -99,6 +99,7 @@ class _SignupState extends State<Signup> {
               } else if (value != password.text) {
                 return 'Las contraseñas no coinciden.';
               }
+              return null;
             },
             decoration: InputDecoration(
               border: InputBorder.none,

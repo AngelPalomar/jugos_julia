@@ -9,7 +9,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
+  final _loginFormKey = GlobalKey<FormState>();
+  final phoneNumber = TextEditingController();
+  final password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class _LoginState extends State<Login> {
     );
 
     Widget form = Form(
-      key: _formKey,
+      key: _loginFormKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -53,6 +55,13 @@ class _LoginState extends State<Login> {
                 children: [
                   TextFormField(
                     keyboardType: TextInputType.phone,
+                    controller: phoneNumber,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Ingresa tu número celular.';
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       filled: true,
@@ -65,6 +74,13 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 16),
                   TextFormField(
                     obscureText: true,
+                    controller: password,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Ingresa una contraseña';
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       filled: true,
@@ -76,7 +92,13 @@ class _LoginState extends State<Login> {
                   ),
                   const SizedBox(height: 32),
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_loginFormKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
+                      }
+                    },
                     child: const Text("INGRESAR"),
                   ),
                   const SizedBox(height: 6),
