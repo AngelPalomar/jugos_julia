@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jugos_julia/api/Api.dart';
+import 'package:jugos_julia/models/User.dart';
+import 'package:http/http.dart' as http;
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -13,6 +18,26 @@ class _SignupState extends State<Signup> {
   final phoneNumber = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+  Future<User>? _futureUser;
+
+  Future<User> createUser(User user) async {
+    String url = Api.user['signup'] as String;
+
+    final response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'PhoneNumber': user.phoneNumber,
+          'Password': user.password
+        }));
+
+    if (response.statusCode == 201) {
+      return user;
+    } else {
+      throw Exception('Failed to create album.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +141,16 @@ class _SignupState extends State<Signup> {
               if (_signUpFormKey.currentState!.validate()) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Processing Data')),
+                );
+
+                final user = User(
+                    phoneNumber: phoneNumber.text, password: password.text);
+
+                _futureUser = createUser(user);
+                print(_futureUser.toString());
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('User created.')),
                 );
               }
             },
